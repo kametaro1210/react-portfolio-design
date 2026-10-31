@@ -1,3 +1,4 @@
+import { RevealOnScroll } from "../RevealOnScroll";
 
 // プロジェクト情報の必須項目と型を定め、データの不足や型の誤りを防ぐ。
 interface Project {
@@ -40,6 +41,8 @@ export const Projects = () => {
       id="projects"
       className="min-h-screen flex items-center justify-center px-4 py-16 sm:px-6 sm:py-20"
     >
+
+      <RevealOnScroll>
 
       <div className="w-full max-w-5xl mx-auto">
         <h2 className="text-3xl font-bold mb-8 bg-linear-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-center">
@@ -84,6 +87,9 @@ export const Projects = () => {
           ))}
         </div>
       </div>
+      
+    </RevealOnScroll>
+
     </section>
   );
 };

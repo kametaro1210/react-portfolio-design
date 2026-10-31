@@ -1,3 +1,4 @@
+import { RevealOnScroll } from "../RevealOnScroll";
 
 export const About = () => {
 
@@ -21,6 +22,7 @@ export const About = () => {
       id="about"
       className="min-h-screen flex items-center justify-center px-4 py-16 sm:px-6 sm:py-20"
     >
+      <RevealOnScroll>
 
         <div className="w-full max-w-3xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 bg-linear-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-center">
@@ -103,6 +105,8 @@ export const About = () => {
 
           </div>
         </div>
+
+      </RevealOnScroll>
 
     </section>
   );
