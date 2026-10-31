@@ -2,6 +2,7 @@ import { useState } from "react";
 import { LoadingScreen } from "./components/LoadingScreen";
 import { MobileMenu } from "./components/MobileMenu";
 import { Navbar } from "./components/Navbar";
+import { Home } from "./components/section/Home";
 import "./index.css";
 
 function App() {
@@ -29,6 +30,8 @@ function App() {
 
         {/* メニューボタン(≡)で開閉できるようにする */}
         <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+
+        <Home />
 
       </div>
     </>
