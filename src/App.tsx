@@ -4,6 +4,7 @@ import { MobileMenu } from "./components/MobileMenu";
 import { Navbar } from "./components/Navbar";
 import { About } from "./components/section/About";
 import { Home } from "./components/section/Home";
+import { Projects } from "./components/section/Projects";
 import "./index.css";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
 
         <Home />
         <About />
+        <Projects />
 
       </div>
     </>
