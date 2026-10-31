@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { LoadingScreen } from "./components/LoadingScreen";
+import { MobileMenu } from "./components/MobileMenu";
+import { Navbar } from "./components/Navbar";
 import "./index.css";
 
 function App() {
 
   // ローディング完了状態を管理する（初期状態は未完了）
   const [isLoaded, setIsLoaded] = useState(false); 
+
+  // MobileMenuの開閉状態を管理する（初期状態は閉じている）
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <>
@@ -19,6 +24,11 @@ function App() {
         } bg-black text-gray-100`}
       >
 
+        {/* メニューの開閉状態と更新関数を渡し、Navbarからメニューを開閉できるようにする */}
+        <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+
+        {/* メニューボタン(≡)で開閉できるようにする */}
+        <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
       </div>
     </>
