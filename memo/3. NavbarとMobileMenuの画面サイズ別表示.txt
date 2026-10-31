@@ -1,0 +1,45 @@
+
+==========================================
+PCとスマートフォンの画面サイズ別表示
+==========================================
+
+対象ファイル:
+src\App.tsx
+src\components\Navbar.tsx
+src\components\MobileMenu.tsx
+
+------------------------------------------
+大きい画面（PC・タブレット）
+------------------------------------------
+
+- Navbar.tsx:
+
+<div className="hidden md:flex items-center space-x-8">
+
+「hidden md:flex」により、md以上の画面ではPC用リンクを表示します。
+
+------------------------------------------
+小さい画面（スマートフォンなど）
+------------------------------------------
+
+- Navbar.tsx:
+
+<div className="... md:hidden" onClick={() => setMenuOpen((prev) => !prev)}>
+
+「md:hidden」により、md未満ではメニューボタンを表示します。
+ボタンを押すとsetMenuOpenがmenuOpenを切り替えます。
+
+------------------------------------------
+MobileMenuとのつながり
+------------------------------------------
+
+App.tsxでmenuOpenを管理し、NavbarとMobileMenuに渡しています。
+
+const [menuOpen, setMenuOpen] = useState(false);
+
+<Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+<MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+
+Navbarのボタンを押すとAppのmenuOpenが更新され、
+その値がMobileMenuに渡ります。MobileMenuはmenuOpenがtrueなら表示し、
+falseなら閉じます。画面幅ではなく、この値でメニューの開閉が決まります。
