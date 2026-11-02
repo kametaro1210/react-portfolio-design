@@ -1,3 +1,4 @@
+import emailjs from "@emailjs/browser";
 import { useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 
@@ -9,6 +10,27 @@ export const Contact = () => {
       email: "",
       message: "",
     });
+
+    // 引数は、フォーム要素（<form>）で起きた送信などのイベントを安全に扱うための型です。
+    const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
+
+      // ブラウザのデフォルトのフォーム送信（ページのリロード）をキャンセル
+      e.preventDefault();
+
+      emailjs
+        .sendForm(
+          import.meta.env.VITE_SERVICE_ID,
+          import.meta.env.VITE_TEMPLATE_ID,
+          // 送信されたフォーム（名前・メール・メッセージの入力欄）をEmailJSに渡す。
+          e.currentTarget,
+          import.meta.env.VITE_PUBLIC_KEY
+        )
+        .then(() => {
+          alert("メッセージを送信しました！");
+          setFormData({ name: "", email: "", message: "" });
+        })
+        .catch(() => alert("送信に失敗しました。もう一度お試しください。"));
+    };
   
     return (
       <section
@@ -23,7 +45,7 @@ export const Contact = () => {
               Get In Touch
             </h2>
 
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="relative">
                 <input
                   type="text"

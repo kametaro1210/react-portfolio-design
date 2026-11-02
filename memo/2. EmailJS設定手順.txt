@@ -1,0 +1,91 @@
+
+==========================================
+EmailJSの設定手順
+==========================================
+
+このメモでは、問い合わせフォームからメールを送るための
+EmailJSの設定方法を説明します。
+
+------------------------------------------
+1. EmailJSのパッケージをインストールする
+------------------------------------------
+
+プロジェクトのルートフォルダで、次のコマンドを実行します。
+
+npm install @emailjs/browser
+
+このパッケージを使うと、ReactアプリからEmailJSへフォームの内容を送信できます。
+
+------------------------------------------
+2. Email Serviceを接続する
+------------------------------------------
+
+1. EmailJSにログインし、Dashboardの「Email Services」を開く。
+2. 「Add New Service」から利用するメールサービスを選ぶ。
+3. 画面の案内に従ってメールアカウントを接続し、テスト送信する。
+4. 作成したServiceのIDを控える。
+
+Service IDは、アプリからどのメールサービスを使って送信するかを
+EmailJSに伝えるためのIDです。
+
+------------------------------------------
+3. メールテンプレートを作成する
+------------------------------------------
+
+1. Dashboardの「Email Templates」を開き、「Create New Template」を選ぶ。
+2. 受信先、件名、本文などを設定する。
+3. 本文にフォームの値を差し込む変数を設定する。
+4. テスト送信して、内容が届くことを確認する。
+5. 作成したTemplateのIDを控える。
+
+このプロジェクトのフォーム項目名はname、email、messageです。
+テンプレート本文では、たとえば{{name}}、{{email}}、{{message}}と書くと、
+フォームに入力された値をメールに差し込めます。
+
+------------------------------------------
+4. Viteの.envに設定する
+------------------------------------------
+
+EmailJSの値は、プロジェクト直下の.envに次の形式で設定します。
+右辺にはEmailJSの画面で確認した値を入力します。
+
+---
+
+VITE_SERVICE_ID=取得したService ID
+VITE_TEMPLATE_ID=取得したTemplate ID
+VITE_PUBLIC_KEY=Account画面で確認したPublic Key
+
+---
+
+Service IDは「Email Services」、Template IDは「Email Templates」、
+Public KeyはDashboardの「Account」から確認します。
+
+Viteでは、.envの変数名を「VITE_」で始めると、
+コードからimport.meta.env.VITE_変数名で読み込めます。
+このプロジェクトではContact.tsxが3つの値を読み込み、EmailJSに渡します。
+.envを変更した後は、開発サーバーを再起動してください。
+
+注意:
+「VITE_」で始まる値はブラウザーで動くコードに含まれます。
+EmailJSのPublic Keyはブラウザー利用向けですが、Private Keyや
+メールアカウントのパスワードなど、秘密にする値は書かないでください。
+.envはGitに登録しないでください。
+
+e.currentTargetは.envから読む値ではありません。
+フォーム送信時にContact.tsxで取得する、入力欄を含むフォーム要素です。
+
+------------------------------------------
+参考
+------------------------------------------
+
+EmailJS: Email Services
+https://www.emailjs.com/docs/user-guide/connecting-email-services/
+
+EmailJS: Email Templates
+https://www.emailjs.com/docs/user-guide/creating-email-templates/
+
+EmailJS: sendForm
+https://www.emailjs.com/docs/sdk/send-form/
+
+Vite: Env Variables and Modes
+https://vite.dev/guide/env-and-mode
