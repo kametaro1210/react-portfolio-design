@@ -44,3 +44,16 @@ body {
     animation: loading 0.8s ease infinite;
   }
 }
+
+/* コンテンツが見える前の状態（下へ20pxずらして、透明度を0にする） */
+.reveal {
+  opacity: 0; /* 最初は透明にして、コンテンツを見えなくする */
+  transform: translateY(20px); /* 表示前は少し下にずらす */
+  transition: opacity 2.0s ease, transform 2.0s ease; /* 透明度は2.0秒、位置の移動は2.0秒かけて変化させる */
+}
+
+/* 画面にコンテンツが入った瞬間（元の位置に戻し、透明度を1にする） */
+.reveal.visible {
+  opacity: 1; /* 透明度を戻してコンテンツを表示する */
+  transform: translateY(0); /* 元の位置に移動させる */
+}
